@@ -3,6 +3,8 @@ alias l="ls -F"
 alias ll="ls -lh"
 alias la="ls -A"
 
+alias py="python"
+
 if [ -f /usr/bin/pacman-color ]; then
     alias pacman="pacman-color"
 fi
