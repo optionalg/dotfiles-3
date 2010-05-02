@@ -1,23 +1,14 @@
-
 # Check for an interactive session
 [ -z "$PS1" ] && return
+
+. .bash-config/aliases.sh
 
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/bin
 
 export EDITOR=vim
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
-
-alias ll="ls -lh"
-alias la="ls -A"
-
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;31'
-
-if [ -f /usr/bin/pacman-color ]; then
-    alias pacman="pacman-color"
-fi
 
 complete -cf sudo
 alias sudo='sudo '
