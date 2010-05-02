@@ -6,3 +6,6 @@ alias la="ls -A"
 if [ -f /usr/bin/pacman-color ]; then
     alias pacman="pacman-color"
 fi
+
+alias reload=". ~/.bashrc"
+alias webshare="python -m SimpleHTTPServer"

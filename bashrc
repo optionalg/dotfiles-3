@@ -1,9 +1,11 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-source .bash-config/aliases.sh
-source .bash-config/functions.sh
-source .bash-config/templates.sh
+if [ -d ~/.bashrc.d ]; then
+    for file in ~/.bashrc.d/*; do
+        source $file
+    done
+fi
 
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/bin

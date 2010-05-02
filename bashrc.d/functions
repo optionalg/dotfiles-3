@@ -38,7 +38,3 @@ function gmail {
 function calc {
       echo "scale=8; $@" | bc
 }
-
-function reload {
-    source ~/.bashrc
-}
