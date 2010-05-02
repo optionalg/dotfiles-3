@@ -8,7 +8,7 @@ if [ -d ~/.bashrc.d ]; then
 fi
 
 if [ -f ~/.shellcommands.py ]; then
-    eval `python .shellcommands.py`
+    eval `python ~/.shellcommands.py`
 fi
 
 export PATH=$PATH:/usr/local/bin
