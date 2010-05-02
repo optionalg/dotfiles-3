@@ -1,7 +1,9 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-. .bash-config/aliases.sh
+source .bash-config/aliases.sh
+source .bash-config/functions.sh
+source .bash-config/templates.sh
 
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$HOME/bin
@@ -21,10 +23,6 @@ export PS1='\[\033[0;32m\]\u\[\033[0m\]:\w`r=$?; echo -n $(__git_ps1 "(%s)");\
  test $r -ne 0 && echo "\[\033[1;31m\]"`\$\[\033[0m\] '
 
 export PYTHONSTARTUP=~/.pythonrc
-
-function reload {
-    source ~/.bashrc
-}
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
