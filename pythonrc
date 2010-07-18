@@ -1,0 +1,18 @@
+import atexit
+import os
+import readline
+import rlcompleter
+import sys
+
+history = os.path.expanduser('~/.python_history')
+try:
+    readline.read_history_file(history)
+except IOError:
+    pass
+readline.parse_and_bind('tab: complete')
+readline.set_history_length(1000)
+atexit.register(readline.write_history_file, history)
+
+# Import a few modules that are nice to have around
+import time
+import re
