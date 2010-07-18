@@ -1,4 +1,6 @@
-alias ls='ls --color=auto'
+if [[ $PLATFORM == "Linux" ]]; then
+    alias ls='ls --color=auto'
+fi
 alias l="ls -F"
 alias ll="ls -lh"
 alias la="ls -A"

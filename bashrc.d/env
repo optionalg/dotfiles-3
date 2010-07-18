@@ -1,12 +1,14 @@
-
-HOST=`hostname`
-
-if [[($HOST == 'hmarr-arch')]]; then
+if [[ $HOST == 'hmarr-arch' ]]; then
     export M2_HOME=/opt/apache-maven-2.2.1
     export PATH=$PATH:/usr/local/bin
     export PATH=$PATH:/usr/local/scala/bin
     export PATH=$PATH:$HOME/sources/google_appengine
     export PATH=$PATH:$M2_HOME/bin
+fi
+
+if [[ $HOST == "hmarr-mbp" ]]; then
+    export CLICOLOR=1
+    export LSCOLORS=dxfxcxdxbxegedabagacad
 fi
 
 export PATH=$PATH:$HOME/bin
