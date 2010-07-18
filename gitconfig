@@ -1,0 +1,15 @@
+[user]
+	name = Harry Marr
+	email = harry.marr@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = auto
+[push]
+	default = matching
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+	pretty-graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
