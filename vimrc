@@ -80,6 +80,8 @@ filetype plugin indent on
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell scala files to use two spaces for indentation
+    autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Makefiles use tabs only
     autocmd FileType make setlocal noexpandtab
     " Some types of files should wrap to 79 characters

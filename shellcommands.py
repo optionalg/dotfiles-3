@@ -14,6 +14,11 @@ def wrap(file, width=79):
     import textwrap
     print '\n'.join(textwrap.wrap(open(file).read(), width))
 
+def rot13():
+    import codecs
+    for line in sys.stdin:
+        sys.stdout.write(codecs.encode(line, 'rot13'))
+
 # DO NOT MODIFY AFTER HERE ----------------------------------------------------
 
 import inspect
