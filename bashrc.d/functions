@@ -38,3 +38,11 @@ function gmail {
 function calc {
       echo "scale=8; $@" | bc
 }
+
+function google_settings {
+    alias vi='vim -c "set shiftwidth=2" -c "set softtabstop=2"'
+    alias vim='vim -c "set shiftwidth=2" -c "set softtabstop=2"'
+    alias mvim='mvim -c "set shiftwidth=2" -c "set softtabstop=2"'
+    alias python=python2.5
+    export PS1="g:"$PS1
+}
