@@ -36,7 +36,6 @@ fi
 export PYTHONSTARTUP=~/.pythonrc
 
 # virtualenvwrapper
-eval `pip completion --bash`
 export WORKON_HOME=$HOME/.virtualenvs
 if [[ $PLATFORM == "Linux" ]]; then
     source /usr/bin/virtualenvwrapper_bashrc
