@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""Script that I keep in a Git repository along with my dotfiles. In the 
+repository, the files don't have the dot prefix so I can see them more easily.
+Running the script symlinks all the files to ~/.<filename>, checking allowing 
+you to cancel if the file exists.
+"""
+
 import os
 import glob
 

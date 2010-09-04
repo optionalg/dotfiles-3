@@ -4,6 +4,7 @@ if [[ $HOST == 'hmarr-arch' ]]; then
     export PATH=$PATH:/usr/local/scala/bin
     export PATH=$PATH:$HOME/sources/google_appengine
     export PATH=$PATH:$M2_HOME/bin
+    export PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
 fi
 
 if [[ $HOST == "hmarr-mbp" ]]; then
