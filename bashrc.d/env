@@ -6,7 +6,7 @@ if [[ $HOST == 'hmarr-arch' ]]; then
     export PATH=$PATH:$M2_HOME/bin
 fi
 
-if [[ $HOST == "hmarr-mbp" ]]; then
+if [[ $PLATFORM == 'Darwin' ]]; then
     export CLICOLOR=1
     export LSCOLORS=dxfxcxdxbxegedabagacad
 fi

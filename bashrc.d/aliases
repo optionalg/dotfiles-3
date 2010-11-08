@@ -13,3 +13,7 @@ fi
 
 alias reload=". ~/.bashrc"
 alias webshare="python -m SimpleHTTPServer"
+
+if [[ $PLATFORM == "Darwin" ]]; then
+    alias chrome="open -a \"Google Chrome\""
+fi
