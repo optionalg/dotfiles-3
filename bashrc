@@ -22,6 +22,9 @@ NORMAL="\033[0m"
 if [[ $HOST == "hmarr-arch" ]]; then
     source /usr/share/git/completion/git-completion.bash
 fi
+if [[ $HOST == "hmarr-iplatform" ]]; then
+    source /etc/bash_completion.d/git
+fi
 if [[ $HOST == "hmarr-mbp" ]]; then
     source /usr/local/etc/bash_completion.d/git-completion.bash
 fi
@@ -37,10 +40,9 @@ export PYTHONSTARTUP=~/.pythonrc
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-if [[ $PLATFORM == "Linux" ]]; then
+if [[ $HOST == "hmarr-arch" ]]; then
     source /usr/bin/virtualenvwrapper_bashrc
-fi
-if [[ $PLATFORM == "Darwin" ]]; then
+else
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
