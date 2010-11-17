@@ -41,7 +41,7 @@ export PYTHONSTARTUP=~/.pythonrc
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 if [[ $HOST == "hmarr-arch" ]]; then
-    source /usr/bin/virtualenvwrapper_bashrc
+    source /usr/bin/virtualenvwrapper.sh
 else
     source /usr/local/bin/virtualenvwrapper.sh
 fi
