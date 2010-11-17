@@ -49,6 +49,8 @@ if has("gui_running")
     set lines=45
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
+    " Set a pretty font
+    set guifont=Inconsolata\ 12
 endif
 
 let mapleader=','
@@ -70,6 +72,16 @@ vmap <leader>x "+x
 nmap <leader>p "+gp
 nmap <leader>P "+gP
 
+" Write files with sudo if opened without priviliedges
+cmap w!! w !sudo tee % >/dev/null
+
+" Switch tabs easily
+nmap <silent><A-left> gT
+nmap <silent><A-right> gt
+
+" NERDTree
+map <F3> :NERDTreeToggle<CR>
+
 " Shortcuts for enabling / disabling search highlighting
 nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
@@ -80,6 +92,8 @@ filetype plugin indent on
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell javascript files to use two spaces for indentation
+    autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell scala files to use two spaces for indentation
     autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Makefiles use tabs only
