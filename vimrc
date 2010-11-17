@@ -1,3 +1,6 @@
+" Pathogen support
+call pathogen#runtime_append_all_bundles() 
+
 " Enable syntax highlighting
 syntax enable
 " Use indent level from previous line
@@ -87,6 +90,8 @@ nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
 
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
+" (force reload for pathogen)
+filetype off
 filetype plugin indent on
 
 if has("autocmd")
