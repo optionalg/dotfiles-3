@@ -104,6 +104,8 @@ if has("autocmd")
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell javascript files to use two spaces for indentation
     autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell coffeescript files to use two spaces for indentation
+    autocmd FileType coffee setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell scala files to use two spaces for indentation
     autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Makefiles use tabs only
