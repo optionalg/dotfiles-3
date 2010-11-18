@@ -51,6 +51,8 @@ if has("gui_running")
     " Make the window a bit taller
     set columns=80
     set lines=45
+    " Kill toolbar
+    set guioptions-=T
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
     " Set a pretty font
@@ -84,8 +86,13 @@ nmap <leader>P "+gP
 cmap w!! w !sudo tee % >/dev/null
 
 " Switch tabs easily
-nmap <silent><A-left> gT
-nmap <silent><A-right> gt
+if s:uname == "Darwin"
+    nnoremap <D-S-left> gT
+    nnoremap <D-S-right> gt
+else
+    nnoremap <A-left> gT
+    nnoremap <A-right> gt
+endif
 
 " Easy access to NERDTree
 map <F3> :NERDTreeToggle<CR>
