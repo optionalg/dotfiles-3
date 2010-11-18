@@ -1,3 +1,6 @@
+" Pathogen support
+call pathogen#runtime_append_all_bundles() 
+
 " Enable syntax highlighting
 syntax enable
 " Use indent level from previous line
@@ -40,6 +43,7 @@ set wildmenu
 colorscheme zellner
 
 " Special options for gvim (instead of in .gvimrc)
+let s:uname = system("echo -n \"$(uname)\"")
 if has("gui_running")
     map <UP> i
     " Dark colour scheme for gvim
@@ -47,8 +51,16 @@ if has("gui_running")
     " Make the window a bit taller
     set columns=80
     set lines=45
+    " Kill toolbar
+    set guioptions-=T
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
+    " Set a pretty font
+    if s:uname == "Darwin"
+        set gfn=Menlo\ Regular:h12
+    else
+        set guifont=Inconsolata\ 12
+    endif
 endif
 
 let mapleader=','
@@ -70,16 +82,37 @@ vmap <leader>x "+x
 nmap <leader>p "+gp
 nmap <leader>P "+gP
 
+" Write files with sudo if opened without priviliedges
+cmap w!! w !sudo tee % >/dev/null
+
+" Switch tabs easily
+if s:uname == "Darwin"
+    nnoremap <D-S-left> gT
+    nnoremap <D-S-right> gt
+else
+    nnoremap <A-left> gT
+    nnoremap <A-right> gt
+endif
+
+" Easy access to NERDTree
+map <F3> :NERDTreeToggle<CR>
+
 " Shortcuts for enabling / disabling search highlighting
 nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
 
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
+" (force reload for pathogen)
+filetype off
 filetype plugin indent on
 
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell javascript files to use two spaces for indentation
+    autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell coffeescript files to use two spaces for indentation
+    autocmd FileType coffee setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell scala files to use two spaces for indentation
     autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Makefiles use tabs only

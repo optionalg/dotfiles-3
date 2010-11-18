@@ -25,8 +25,8 @@ fi
 if [[ $HOST == "hmarr-iplatform" ]]; then
     source /etc/bash_completion.d/git
 fi
-if [[ $HOST == "hmarr-mbp" ]]; then
-    source /usr/local/etc/bash_completion.d/git-completion.bash
+if [[ $HOST == "hmarr-mba" ]]; then
+    source /usr/local/Cellar/git/1.7.3.1/etc/bash_completion.d/git-completion.bash
 fi
 GIT_PS1_SHOWDIRTYSTATE=1 # Show * or + next to branch
 export PS1='\[\033[0;32m\]\u\[\033[0m\]:\w`r=$?; echo -n $(__git_ps1 "(%s)");\
@@ -41,9 +41,11 @@ export PYTHONSTARTUP=~/.pythonrc
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 if [[ $HOST == "hmarr-arch" ]]; then
-    source /usr/bin/virtualenvwrapper_bashrc
+    source /usr/bin/virtualenvwrapper.sh
 else
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
+
+source $HOME/.bashrc.local

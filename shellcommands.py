@@ -10,20 +10,26 @@ def makepassword(length=8):
     print ''.join(random.choice(chars) for i in range(length))
 
 def square(x):
-    print int(x)**2
+    print(int(x)**2)
 
 def add(*nums):
-    print sum([int(num) for num in nums])
+    print(sum([int(num) for num in nums]))
 
 def wrap(file, width=79):
     "Usage: %prog [-w]"
     import textwrap
-    print '\n'.join(textwrap.wrap(open(file).read(), width))
+    print('\n'.join(textwrap.wrap(open(file).read(), width)))
 
 def rot13():
     import codecs
     for line in sys.stdin:
         sys.stdout.write(codecs.encode(line, 'rot13'))
+
+def mksecretkey():
+    import string
+    import random
+    chars = string.letters + string.digits + '!+*_&$)('
+    print(''.join(random.sample(chars, 50)))
 
 # DO NOT MODIFY AFTER HERE ----------------------------------------------------
 
@@ -81,9 +87,10 @@ if __name__ == '__main__':
         options = options.__dict__
         sys.exit(func(*args, **options) or 0)
 
-    for name, item in globals().items():
+    variables = globals().copy().items()
+    for name, item in variables:
         if not name.startswith('_') and inspect.isfunction(item):
-            print "function %(func)s { python %(script)s %(func)s $@; };" % {
+            print("function %(func)s { python %(script)s %(func)s $@; };" % {
                 'func': name,
                 'script': os.path.abspath(__file__),
-            }
+            })
