@@ -49,6 +49,7 @@ if has("gui_running")
     set lines=45
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
+    set gfn=Menlo\ Regular:h12
 endif
 
 let mapleader=','
@@ -69,6 +70,12 @@ vmap <leader>y "+y
 vmap <leader>x "+x
 nmap <leader>p "+gp
 nmap <leader>P "+gP
+
+map <silent><A-Left> gT
+map <silent><A-Right> gt
+
+" Easy access to NERDTree
+map <F3> :NERDTreeToggle<CR>
 
 " Shortcuts for enabling / disabling search highlighting
 nmap ,hl :set hls<CR>
