@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""Script that I keep in a Git repository along with my dotfiles. In the 
+repository, the files don't have the dot prefix so I can see them more easily.
+Running the script symlinks all the files to ~/.<filename>, checking allowing 
+you to cancel if the file exists.
+"""
+
 import os
 import glob
 
@@ -33,13 +39,13 @@ def main():
 
             response = raw_input("Overwrite file `%s'? [y/N] " % dotfile)
             if not response.lower().startswith('y'):
-                print "Skipping `%s'..." % dotfile
+                print("Skipping `%s'..." % dotfile)
                 continue
 
             force_remove(dotfile)
 
         os.symlink(source, dotfile)
-        print "%s => %s" % (dotfile, source)
+        print("%s => %s" % (dotfile, source))
 
 if __name__ == '__main__':
     main()

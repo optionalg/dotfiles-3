@@ -1,3 +1,6 @@
+" Pathogen support
+call pathogen#runtime_append_all_bundles() 
+
 " Enable syntax highlighting
 syntax enable
 " Use indent level from previous line
@@ -40,6 +43,7 @@ set wildmenu
 colorscheme zellner
 
 " Special options for gvim (instead of in .gvimrc)
+let s:uname = system("echo -n \"$(uname)\"")
 if has("gui_running")
     map <UP> i
     " Dark colour scheme for gvim
@@ -49,7 +53,12 @@ if has("gui_running")
     set lines=45
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
-    set gfn=Menlo\ Regular:h12
+    " Set a pretty font
+    if s:uname == "Darwin"
+        set gfn=Menlo\ Regular:h12
+    else
+        set guifont=Inconsolata\ 12
+    endif
 endif
 
 let mapleader=','
@@ -71,8 +80,12 @@ vmap <leader>x "+x
 nmap <leader>p "+gp
 nmap <leader>P "+gP
 
-map <silent><A-Left> gT
-map <silent><A-Right> gt
+" Write files with sudo if opened without priviliedges
+cmap w!! w !sudo tee % >/dev/null
+
+" Switch tabs easily
+nmap <silent><A-left> gT
+nmap <silent><A-right> gt
 
 " Easy access to NERDTree
 map <F3> :NERDTreeToggle<CR>
@@ -82,11 +95,15 @@ nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
 
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
+" (force reload for pathogen)
+filetype off
 filetype plugin indent on
 
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell javascript files to use two spaces for indentation
+    autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell scala files to use two spaces for indentation
     autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Makefiles use tabs only
