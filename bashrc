@@ -25,6 +25,9 @@ fi
 if [[ $HOST == "hmarr-iplatform" ]]; then
     source /etc/bash_completion.d/git
 fi
+if [[ $HOST == "hmarr-mbp" ]]; then
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+fi
 if [[ $HOST == "hmarr-mba" ]]; then
     source /usr/local/Cellar/git/1.7.3.1/etc/bash_completion.d/git-completion.bash
 fi
@@ -48,4 +51,6 @@ fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
-source $HOME/.bashrc.local
+if [ -f $HOME/.bashrc.local ]; then
+    source $HOME/.bashrc.local
+fi
