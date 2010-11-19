@@ -141,3 +141,8 @@ augroup mkd
     " Enable Markdown support
     autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
 augroup end
+
+" Source a global configuration file if available
+if filereadable(expand("$HOME/.vimrc.local"))
+    source $HOME/.vimrc.local
+endif
