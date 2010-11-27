@@ -7,7 +7,7 @@ import random
 
 def makepassword(length=8):
     chars = list(string.letters + string.digits)
-    print ''.join(random.choice(chars) for i in range(length))
+    print(''.join(random.choice(chars) for i in range(length)))
 
 def square(x):
     print(int(x)**2)
