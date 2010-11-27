@@ -90,8 +90,8 @@ if s:uname == "Darwin"
     nnoremap <D-S-left> gT
     nnoremap <D-S-right> gt
 else
-    nnoremap <A-left> gT
-    nnoremap <A-right> gt
+    nnoremap <A-S-left> gT
+    nnoremap <A-S-right> gt
 endif
 
 " Easy access to NERDTree
