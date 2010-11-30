@@ -137,6 +137,9 @@ if has("autocmd")
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 endif
 
+" JSON support
+au! BufRead,BufNewFile *.json setfiletype json 
+
 augroup mkd
     " Enable Markdown support
     autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
