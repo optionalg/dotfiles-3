@@ -106,9 +106,14 @@ nmap ,nhl :set nohls<CR>
 filetype off
 filetype plugin indent on
 
+" JSON support
+au! BufRead,BufNewFile *.json setfiletype json 
+
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell json files to use two spaces for indentation
+    autocmd FileType json setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell javascript files to use two spaces for indentation
     autocmd FileType javascript setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell coffeescript files to use two spaces for indentation
@@ -136,9 +141,6 @@ if has("autocmd")
     " Enable omnicomplete for Python
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 endif
-
-" JSON support
-au! BufRead,BufNewFile *.json setfiletype json 
 
 augroup mkd
     " Enable Markdown support
