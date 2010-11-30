@@ -1,0 +1,31 @@
+# Check for an interactive session
+[ -z "$PS1" ] && return
+
+complete -cf sudo
+alias sudo='sudo '
+
+if [[ $HOST == "hmarr-arch" ]]; then
+    source /usr/share/git/completion/git-completion.bash
+fi
+if [[ $HOST == "hmarr-iplatform" ]]; then
+    source /etc/bash_completion.d/git
+fi
+if [[ $HOST == "hmarr-mbp" ]]; then
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+fi
+if [[ $HOST == "hmarr-mba" ]]; then
+    source /usr/local/Cellar/git/1.7.3.1/etc/bash_completion.d/git-completion.bash
+fi
+
+GIT_PS1_SHOWDIRTYSTATE=1 # Show * or + next to branch
+export PS1='\[\033[0;32m\]\u\[\033[0m\]:\w`r=$?; echo -n $(__git_ps1 "(%s)");\
+ test $r -ne 0 && echo "\[\033[1;31m\]"`\$\[\033[0m\] '
+
+if [ $TERM = xterm ]; then
+    PROMPT_COMMAND='echo -ne "\033]0;[`basename "${PWD}"`]\007"'
+fi
+
+if [ -f $HOME/.bashrc.local ]; then
+    source $HOME/.bashrc.local
+fi
+

@@ -1,0 +1,26 @@
+# Config file for zsh and bash
+
+HOST=$(hostname)
+PLATFORM=$(uname)
+
+for file in $HOME/.shell/*; do
+    if [[ $file != $0 ]]; then
+        source $file
+    fi
+done
+
+if [ -f $HOME/.shellcommands.py ]; then
+    eval `python $HOME/.shellcommands.py`
+fi
+
+export PYTHONSTARTUP=~/.pythonrc
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+if [[ $HOST == "hmarr-arch" ]]; then
+    source /usr/bin/virtualenvwrapper.sh
+else
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
