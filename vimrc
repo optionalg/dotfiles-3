@@ -42,6 +42,11 @@ set wildmenu
 " Set a colour scheme
 colorscheme zellner
 
+set backup " make backup files
+set backupdir=~/.vim/backup " location of backup files
+set swapfile " make swap files
+set directory=~/.vim/tmp " location of swap files
+
 " Special options for gvim (instead of in .gvimrc)
 let s:uname = system("echo -n \"$(uname)\"")
 if has("gui_running")
