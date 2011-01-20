@@ -156,3 +156,4 @@ augroup end
 if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+

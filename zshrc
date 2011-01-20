@@ -14,7 +14,7 @@ export ZSH_THEME="hmarr"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew git pip osx vagrant)
+plugins=(brew git osx)
 
 source $HOME/.shellconfig
 source $ZSH/oh-my-zsh.sh
