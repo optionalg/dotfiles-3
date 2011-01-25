@@ -82,6 +82,9 @@ inoremap <DOWN> <C-O>gj
 " Make up key move up one row in insert mode even when lines are wrapped
 inoremap <UP> <C-O>gk
 
+inoremap jj <ESC>
+inoremap kk <ESC>
+
 " Make Y yank rest of line, like D and C
 nnoremap Y y$
 
