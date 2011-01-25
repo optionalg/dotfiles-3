@@ -1,5 +1,5 @@
 " Pathogen support
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 
 " Enable syntax highlighting
 syntax enable
@@ -52,7 +52,8 @@ let s:uname = system("echo -n \"$(uname)\"")
 if has("gui_running")
     map <UP> i
     " Dark colour scheme for gvim
-    colorscheme desert
+    "colorscheme desert
+    colorscheme molokai
     " Make the window a bit taller
     set columns=80
     set lines=45
@@ -81,6 +82,9 @@ inoremap <DOWN> <C-O>gj
 " Make up key move up one row in insert mode even when lines are wrapped
 inoremap <UP> <C-O>gk
 
+" Make Y yank rest of line, like D and C
+nnoremap Y y$
+
 " Cut, copy and paste using the real clipboard
 vmap <leader>y "+y
 vmap <leader>x "+x
@@ -106,6 +110,10 @@ map <F3> :NERDTreeToggle<CR>
 nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
 
+" Use the same symbols as TextMate for tabstops and EOLs
+set list
+set listchars=tab:▸\ ,trail:•
+
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
 " (force reload for pathogen)
 filetype off
@@ -114,10 +122,11 @@ filetype plugin indent on
 " Highlight 80th column so code can still be pretty in full-screen terminals
 if exists("&colorcolumn")
     set colorcolumn=81
+    hi ColorColumn guibg=#3d3d3d
 endif
 
 " JSON support
-au! BufRead,BufNewFile *.json setfiletype json 
+au! BufRead,BufNewFile *.json setfiletype json
 
 if has("autocmd")
     " Tell ruby files to use two spaces for indentation
