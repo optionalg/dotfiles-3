@@ -1,2 +1,5 @@
 .*.swp
 *.pyc
+vim/backup/*~
+vim/tmp/*.swp
+vim/.netrwhist

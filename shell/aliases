@@ -19,3 +19,9 @@ if [[ $PLATFORM == "Darwin" ]]; then
     alias finder="open -a \"Finder\""
     alias nc=/usr/local/bin/netcat
 fi
+
+if [[ $PLATFORM == "Darwin" ]]; then
+    alias rvim="mvim --remote-silent"
+else
+    alias rvim="gvim --remote-silent"
+fi
