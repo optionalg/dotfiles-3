@@ -10,6 +10,9 @@ fi
 if [[ $HOST == "hmarr-iplatform" ]]; then
     source /etc/bash_completion.d/git
 fi
+if [[ $HOST == "hmarr-desktop" ]]; then
+    source /etc/bash_completion.d/git
+fi
 if [[ $HOST == "hmarr-mbp" ]]; then
     source /usr/local/etc/bash_completion.d/git-completion.bash
 fi
