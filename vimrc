@@ -182,6 +182,8 @@ if has("autocmd")
     autocmd FileType latex setlocal nosmartindent
     " Enable omnicomplete for Python
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    " Auto compile coffeescript
+    autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -c <afile>
 endif
 
 augroup mkd
