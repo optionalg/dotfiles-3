@@ -113,9 +113,29 @@ map <F3> :NERDTreeToggle<CR>
 nmap ,hl :set hls<CR>
 nmap ,nhl :set nohls<CR>
 
+" Use alt + {j,k} for moving lines up and down
+if s:uname == "Darwin"
+    nnoremap <D-j> :m+<CR>==
+    nnoremap <D-k> :m-2<CR>==
+    "inoremap <M-j> <Esc>:m+<CR>==gi
+    "inoremap <M-k> <Esc>:m-2<CR>==gi
+    vnoremap <D-j> :m'>+<CR>gv=gv
+    vnoremap <D-k> :m-2<CR>gv=gv
+else
+    nnoremap <A-j> :m+<CR>==
+    nnoremap <A-k> :m-2<CR>==
+    "inoremap <A-j> <Esc>:m+<CR>==gi
+    "inoremap <A-k> <Esc>:m-2<CR>==gi
+    vnoremap <A-j> :m'>+<CR>gv=gv
+    vnoremap <A-k> :m-2<CR>gv=gv
+endif
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set list
 set listchars=tab:▸\ ,trail:•
+
+" Remove trailing whitespace
+command CleanWhitespace %s/\s\+$//
 
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
 " (force reload for pathogen)
@@ -162,6 +182,8 @@ if has("autocmd")
     autocmd FileType latex setlocal nosmartindent
     " Enable omnicomplete for Python
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    " Auto compile coffeescript
+    autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -c <afile>
 endif
 
 augroup mkd

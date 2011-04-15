@@ -20,4 +20,4 @@ source $HOME/.shellconfig
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/share/npm/bin:/Users/harry/bin:/usr/local/Cellar/rabbitmq/2.1.1/sbin
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/share/npm/bin:/Users/harry/bin
