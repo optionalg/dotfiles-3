@@ -2,6 +2,8 @@ import sys
 import os
 import string
 import random
+import thread
+import time
 
 # ADD FUNCTIONS HERE ----------------------------------------------------------
 
@@ -34,7 +36,9 @@ def mksecretkey():
 def webshare(open_in_browser=False, port=8000):
     if open_in_browser:
         import webbrowser
-        webbrowser.open_new_tab('http://localhost:{0}'.format(port))
+        def open_in_browser():
+            webbrowser.open_new_tab('http://localhost:{0}'.format(port))
+        _delay_background(open_in_browser, 0.5)
 
     # BaseHTTPServer looks at argv[1] for port
     sys.argv = [sys.argv[0], port]
@@ -87,6 +91,12 @@ def _func_to_option_parser(func):
         parser.add_option(short_name, long_name, action=action, dest=arg_name,
                           default=default, type=arg_type)
     return parser, required_args
+
+def _delay_background(func, delay):
+    def delayed_func():
+        time.sleep(delay)
+        func()
+    thread.start_new_thread(delayed_func, ())
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
