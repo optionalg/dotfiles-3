@@ -8,6 +8,8 @@ alias la="ls -A"
 alias py="python"
 alias ipy="ipython"
 
+alias :q=exit
+
 if [ -f /usr/bin/pacman-color ]; then
     alias pacman="pacman-color"
 fi
