@@ -12,8 +12,6 @@ if [ -f /usr/bin/pacman-color ]; then
     alias pacman="pacman-color"
 fi
 
-alias webshare="python -m SimpleHTTPServer"
-
 if [[ $PLATFORM == "Darwin" ]]; then
     alias chrome="open -a \"Google Chrome\""
     alias finder="open -a \"Finder\""

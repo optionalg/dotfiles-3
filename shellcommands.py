@@ -31,6 +31,19 @@ def mksecretkey():
     chars = string.letters + string.digits + '!+*_&$)('
     print(''.join(random.sample(chars, 50)))
 
+def webshare(open_in_browser=False, port=8000):
+    if open_in_browser:
+        import webbrowser
+        webbrowser.open_new_tab('http://localhost:{0}'.format(port))
+
+    # BaseHTTPServer looks at argv[1] for port
+    sys.argv = [sys.argv[0], port]
+    import SimpleHTTPServer
+    try:
+        SimpleHTTPServer.test()
+    except KeyboardInterrupt:
+        print '\nStopping...'
+
 # DO NOT MODIFY AFTER HERE ----------------------------------------------------
 
 import inspect
