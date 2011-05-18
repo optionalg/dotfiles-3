@@ -49,3 +49,10 @@ function dumbmail {
     echo "Starting dumb mail server on localhost:$port"
     python -m smtpd -n -c DebuggingServer localhost:$port
 }
+
+function ip {
+    if [ ! -z $1 ]; then
+        interface=$1
+    fi
+    ifconfig $interface | grep 'inet ' | awk '{ print $2 }' | grep -v '127.0.0.1'
+}
