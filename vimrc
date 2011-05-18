@@ -130,6 +130,11 @@ else
     vnoremap <A-k> :m-2<CR>gv=gv
 endif
 
+if s:uname == "Darwin"
+    " Command-T -- open in new tab with Command-Enter
+    let g:CommandTAcceptSelectionTabMap=['<D-CR>', '<C-t>']
+endif
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set list
 set listchars=tab:▸\ ,trail:•
