@@ -142,6 +142,8 @@ set listchars=tab:▸\ ,trail:•
 " Remove trailing whitespace
 command CleanWhitespace %s/\s\+$//
 
+set wildignore+=*.o,*.obj,.git,*.pyc
+
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
 " (force reload for pathogen)
 filetype off
