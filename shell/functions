@@ -56,3 +56,9 @@ function ip {
     fi
     ifconfig $interface | grep 'inet ' | awk '{ print $2 }' | grep -v '127.0.0.1'
 }
+
+if [[ $PLATFORM == "Darwin" ]]; then
+    function lock {
+        /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+    }
+fi
