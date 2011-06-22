@@ -19,6 +19,8 @@ if [[ $PLATFORM == "Darwin" ]]; then
     alias finder="open -a \"Finder\""
     alias nc=/usr/local/bin/netcat
     alias updatedb="sudo /usr/libexec/locate.updatedb"
+    alias vim="mvim -v"
+    alias vi="mvim -v"
 fi
 
 if [[ $PLATFORM == "Darwin" ]]; then
