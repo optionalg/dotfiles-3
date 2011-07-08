@@ -49,6 +49,11 @@ set directory=~/.vim/tmp " location of swap files
 
 " Special options for gvim (instead of in .gvimrc)
 let s:uname = system("echo -n \"$(uname)\"")
+
+if s:uname == "Darwin"
+    colorscheme molokai
+endif
+
 if has("gui_running")
     map <UP> i
     " Dark colour scheme for gvim
