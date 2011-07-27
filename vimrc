@@ -157,7 +157,7 @@ filetype plugin indent on
 " Highlight 80th column so code can still be pretty in full-screen terminals
 if exists("&colorcolumn")
     set colorcolumn=81
-    hi ColorColumn guibg=#282828
+    hi ColorColumn guibg=#282828 ctermbg=235
 endif
 
 " JSON support
