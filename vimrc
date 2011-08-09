@@ -145,7 +145,18 @@ set list
 set listchars=tab:▸\ ,trail:•
 
 " Remove trailing whitespace
-command CleanWhitespace %s/\s\+$//
+function! <SID>CleanWhitespace()
+    " Preparation - save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+command CleanWhitespace call <SID>CleanWhitespace()
 
 set wildignore+=*.o,*.obj,.git,*.pyc
 
@@ -164,6 +175,8 @@ endif
 au! BufRead,BufNewFile *.json setfiletype json
 
 if has("autocmd")
+    " Clean up whitespace on save
+    autocmd BufWritePre * CleanWhitespace
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell json files to use two spaces for indentation
@@ -196,12 +209,11 @@ if has("autocmd")
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     " Auto compile coffeescript
     autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -c <afile>
-endif
 
-augroup mkd
     " Enable Markdown support
-    autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
-augroup end
+    autocmd FileType markdown setlocal ai formatoptions=tcroqn2 comments=n:&gt;
+    autocmd FileType markdown setlocal nolist linebreak
+endif
 
 " Source a global configuration file if available
 if filereadable(expand("$HOME/.vimrc.local"))
