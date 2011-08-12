@@ -17,10 +17,11 @@ def square(x):
 def add(*nums):
     print(sum([int(num) for num in nums]))
 
-def wrap(file, width=79):
+def wrap(filename, width=79):
     "Usage: %prog [-w]"
     import textwrap
-    print('\n'.join(textwrap.wrap(open(file).read(), width)))
+    fp = sys.stdin if filename == '-' else open(filename)
+    print('\n'.join(textwrap.wrap(fp.read(), width)))
 
 def rot13():
     import codecs
