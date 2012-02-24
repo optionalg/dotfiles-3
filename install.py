@@ -9,7 +9,7 @@ you to cancel if the file exists.
 import os
 import glob
 
-EXCLUDE = ['install.py']
+EXCLUDE = ['install.py', 'README.rst']
 NO_DOT_PREFIX = ['bin']
 
 def force_remove(path):

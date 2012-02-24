@@ -62,3 +62,24 @@ if [[ $PLATFORM == "Darwin" ]]; then
         /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
     }
 fi
+
+function bbikes {
+    location=${1:-$DEFAULT_BBIKE_LOCATION}
+    if [ -z $location ]; then
+        echo "usage: bbikes <location>"
+        echo "(you can also set a default location with DEFAULT_BBIKE_LOCATION)"
+        return 1
+    fi
+    url='https://web.barclayscyclehire.tfl.gov.uk/maps'
+    user_agent='Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)'
+    data=$(curl -sA "$user_agent" "$url" | grep ShowInfoB | grep -i "$location")
+    echo $data | while read line; do
+        name=$(echo $line | sed 's/.*name:"\([^"]*\)".*/\1/')
+        echo $name
+        num_bikes=$(echo $line | sed 's/.*nbBikes:"\([0-9]*\)".*/\1/')
+        num_spaces=$(echo $line | sed 's/.*nbEmptyDocks:"\([0-9]*\)".*/\1/')
+        echo "$num_bikes bikes available"
+        echo "$num_spaces spaces available"
+        echo
+    done
+}

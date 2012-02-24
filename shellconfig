@@ -17,10 +17,10 @@ export PYTHONSTARTUP=~/.pythonrc
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-if [[ $HOST == "hmarr-arch" ]]; then
-    source /usr/bin/virtualenvwrapper.sh
-else
+if [[ $PLATFORM == "Darwin" ]]; then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [ -f /usr/bin/virtualenvwrapper.sh ]; then
+    source /usr/bin/virtualenvwrapper.sh
 fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
@@ -28,3 +28,7 @@ export PIP_RESPECT_VIRTUALENV=true
 if [ -f $HOME/.shellconfig.local ]; then
     source $HOME/.shellconfig.local
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
