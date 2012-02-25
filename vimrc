@@ -90,6 +90,29 @@ inoremap <UP> <C-O>gk
 inoremap jj <ESC>
 inoremap kk <ESC>
 
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L g_
+
+" Emacs-style start and end of line
+inoremap <c-a> <esc>I
+inoremap <c-e> <esc>A
+
+" Easy buffer navigation
+noremap <C-h>  <C-w>h
+noremap <C-j>  <C-w>j
+noremap <C-k>  <C-w>k
+noremap <C-l>  <C-w>l
+
+" Fullscreen
+if s:uname == "Darwin"
+    noremap <D-Enter> :se invfullscreen<CR>
+    inoremap <D-Enter> <ESC>:set invfullscreen<CR>a
+else
+    noremap <A-Enter> :se invfullscreen<CR>
+    inoremap <A-Enter> <ESC>:set invfullscreen<CR>a
+end
+
 " Make Y yank rest of line, like D and C
 nnoremap Y y$
 
@@ -98,6 +121,23 @@ vmap <leader>y "+y
 vmap <leader>x "+x
 nmap <leader>p "+gp
 nmap <leader>P "+gP
+
+" Substitute
+nnoremap <leader>s :%s//g<left><left>
+
+" Emacs bindings in command line mode
+cnoremap <c-a> <home>
+cnoremap <c-e> <end>
+
+" Less chording
+nnoremap ; :
+
+" Quick return in insert mode
+inoremap <c-cr> <esc>A<cr>
+
+" Select (charwise) the contents of the current line, excluding indentation.
+" Great for pasting Python lines into REPLs.
+nnoremap vv ^vg_
 
 " Write files with sudo if opened without priviliedges
 cmap w!! w !sudo tee % >/dev/null
