@@ -1,5 +1,5 @@
 " Pathogen support
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 " Enable syntax highlighting
 syntax enable
@@ -38,9 +38,18 @@ set nojoinspaces
 set history=1000
 " Show options during tab completion
 set wildmenu
+" Disable vi-compatibility
+set nocompatible
+" Always show the statusline
+set laststatus=2
+" Necessary to show unicode glyphs
+set encoding=utf-8
 
 " Set a colour scheme
 colorscheme zellner
+
+" Posh powerline glyphs
+let g:Powerline_symbols = 'fancy'
 
 set backup " make backup files
 set backupdir=~/.vim/backup " location of backup files
@@ -68,7 +77,7 @@ if has("gui_running")
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
     " Set a pretty font
     if s:uname == "Darwin"
-        set gfn=Menlo\ Regular:h12
+        set gfn=Menlo\ For\ Powerline:h12
     else
         set guifont=Inconsolata\ 12
     endif
