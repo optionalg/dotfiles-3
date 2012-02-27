@@ -51,10 +51,12 @@ colorscheme zellner
 " Posh powerline glyphs
 let g:Powerline_symbols = 'fancy'
 
-set backup " make backup files
-set backupdir=~/.vim/backup " location of backup files
-set swapfile " make swap files
-set directory=~/.vim/tmp " location of swap files
+" Make backup files
+set backup
+" Location of backup files
+set backupdir=~/.vim/backup
+" Fuck swap files
+set noswapfile
 
 " Special options for gvim (instead of in .gvimrc)
 let s:uname = system("echo -n \"$(uname)\"")
@@ -112,6 +114,7 @@ noremap <C-h>  <C-w>h
 noremap <C-j>  <C-w>j
 noremap <C-k>  <C-w>k
 noremap <C-l>  <C-w>l
+noremap <leader>v <c-w>v
 
 " Fullscreen
 if s:uname == "Darwin"
