@@ -75,6 +75,9 @@ if has("gui_running")
     set lines=45
     " Kill toolbar
     set guioptions-=T
+    " Kill scrollbars
+    set guioptions-=L
+    set guioptions-=r
     " Add a menu option for reloading the vimrc
     menu File.Reload\ Configuration :source ~/.vimrc<CR>:filetype detect<CR>
     " Set a pretty font
@@ -272,3 +275,4 @@ if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
 
+let g:rails_statusline = 0
