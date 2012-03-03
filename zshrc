@@ -19,5 +19,7 @@ plugins=(brew git osx zsh-syntax-highlighting)
 source $HOME/.shellconfig
 source $ZSH/oh-my-zsh.sh
 
+bindkey '\C-x\C-e' edit-command-line
+
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/share/npm/bin:/Users/harry/bin
