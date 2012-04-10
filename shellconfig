@@ -32,3 +32,13 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+# Add a function to cd to each project directory
+PROJECTS_PATH="$HOME/projects"
+for project in `ls $PROJECTS_PATH`; do
+  if [ -d $PROJECTS_PATH/$project ]; then
+    eval "function $project { cd $PROJECTS_PATH/$project }"
+  fi
+done
+

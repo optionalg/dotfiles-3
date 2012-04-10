@@ -21,7 +21,7 @@ def wrap(filename, width=79):
     "Usage: %prog [-w]"
     import textwrap
     fp = sys.stdin if filename == '-' else open(filename)
-    print('\n'.join(textwrap.wrap(fp.read(), width)))
+    print '\n'.join('\n'.join(textwrap.wrap(l, width)) for l in fp.readlines())
 
 def rot13():
     import codecs
