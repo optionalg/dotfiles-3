@@ -16,6 +16,7 @@ fi
 
 if [[ $PLATFORM == "Darwin" ]]; then
     alias chrome="open -a \"Google Chrome\""
+    alias canary="open -a \"Google Chrome Canary\""
     alias finder="open -a \"Finder\""
     alias nc=/usr/local/bin/netcat
     alias updatedb="sudo /usr/libexec/locate.updatedb"

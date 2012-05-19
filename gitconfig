@@ -1,19 +1,23 @@
 [user]
-	name = Harry Marr
-	email = harry.marr@gmail.com
+    name = Harry Marr
+    email = harry.marr@gmail.com
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    ui = auto
 [push]
-	default = matching
+    default = matching
 [alias]
     co = checkout
     ci = commit
     st = status
-	pretty-graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    pretty-graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 [url "https://github.com/"]
     insteadOf = "gh:"
 [core]
-	excludesfile = /Users/harry/.gitexcludes
+    excludesfile = /Users/harry/.gitexcludes
+[help]
+    browser = gitscm
+[browser "gitscm"]
+    cmd = /bin/sh -c 'open http://git-scm.com/docs/$(basename $1 .html)' --

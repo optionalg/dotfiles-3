@@ -29,7 +29,7 @@ set ignorecase
 " Case sensitive searches when uppercase characters are used
 set smartcase
 " Scroll before I reach the window edge
-set scrolloff=2
+set scrolloff=5
 " Use the mouse in terminal emulators that support it
 set mouse=a
 " Only use one space when joining lines
@@ -69,7 +69,9 @@ if has("gui_running")
     map <UP> i
     " Dark colour scheme for gvim
     "colorscheme desert
-    colorscheme molokai
+    "colorscheme molokai
+    set background=light
+    colorscheme solarized
     " Make the window a bit taller
     set columns=80
     set lines=45
@@ -223,7 +225,7 @@ filetype plugin indent on
 " Highlight 80th column so code can still be pretty in full-screen terminals
 if exists("&colorcolumn")
     set colorcolumn=81
-    hi ColorColumn guibg=#282828 ctermbg=235
+    "hi ColorColumn guibg=#282828 ctermbg=235
 endif
 
 " JSON support
