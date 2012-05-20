@@ -21,6 +21,13 @@ Bundle 'tpope/vim-rake'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-endwise'
+Bundle 'matchit.zip'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'othree/html5.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'leshill/vim-json'
+Bundle 'michaeljsmith/vim-indent-object'
 
 " }}}
 
@@ -138,6 +145,10 @@ inoremap kk <ESC>
 " Easier to type, and I never use the default behavior.
 noremap H ^
 noremap L g_
+
+" Stay in visual mode after indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " Emacs-style start and end of line
 inoremap <c-a> <esc>I
