@@ -1,13 +1,27 @@
-" Pathogen support
-call pathogen#infect()
+
+set nocompatible  " be iMproved
+filetype off      " required for vundle
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rake'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Raimondi/delimitMate'
+Bundle 'tpope/vim-endwise'
+
 
 " Enable syntax highlighting
 syntax enable
 " Use indent level from previous line
 set autoindent
-" As above, but recognises code syntax to do it more intelligently
-"set smartindent
-"set cindent
 " Replace tabs with spaces
 set expandtab
 " A tab shows as 4 columns wide
@@ -44,13 +58,6 @@ set nocompatible
 set laststatus=2
 " Necessary to show unicode glyphs
 set encoding=utf-8
-
-" Set a colour scheme
-colorscheme zellner
-
-" Posh powerline glyphs
-let g:Powerline_symbols = 'fancy'
-
 " Make backup files
 set backup
 " Location of backup files
@@ -61,15 +68,9 @@ set noswapfile
 " Special options for gvim (instead of in .gvimrc)
 let s:uname = system("echo -n \"$(uname)\"")
 
-if s:uname == "Darwin"
-    colorscheme molokai
-endif
-
 if has("gui_running")
     map <UP> i
-    " Dark colour scheme for gvim
-    "colorscheme desert
-    "colorscheme molokai
+    " Light solarized colour scheme for gvim
     set background=light
     colorscheme solarized
     " Make the window a bit taller
@@ -89,6 +90,15 @@ if has("gui_running")
         set guifont=Inconsolata\ 12
     endif
 endif
+
+" Posh powerline glyphs
+let g:Powerline_symbols = 'fancy'
+" Don't let Rails status line conflict with powerline
+let g:rails_statusline = 0
+
+" Make delimate handle spacing better
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 
 let mapleader=','
 
@@ -151,6 +161,7 @@ nnoremap ; :
 
 " Quick return in insert mode
 inoremap <c-cr> <esc>A<cr>
+inoremap <s-cr> <esc>O
 
 " Select (charwise) the contents of the current line, excluding indentation.
 " Great for pasting Python lines into REPLs.
@@ -276,5 +287,3 @@ endif
 if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
-
-let g:rails_statusline = 0

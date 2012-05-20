@@ -1,5 +1,6 @@
 .*.swp
 *.pyc
 vim/backup/*~
+vim/bundle
 vim/tmp/*.swp
 vim/.netrwhist
