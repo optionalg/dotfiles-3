@@ -1,3 +1,8 @@
+" .vimrc
+" Author: Harry Marr <harry@hmarr.com>
+" Source: https://github.com/hmarr/dotfiles/tree/master/vimrc
+
+" Vundle Dependencies ============================================= {{{
 
 set nocompatible  " be iMproved
 filetype off      " required for vundle
@@ -17,6 +22,9 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-endwise'
 
+" }}}
+
+" Basic Settings ================================================== {{{
 
 " Enable syntax highlighting
 syntax enable
@@ -64,12 +72,28 @@ set backup
 set backupdir=~/.vim/backup
 " Fuck swap files
 set noswapfile
+" Use the same symbols as TextMate for tabstops and EOLs
+set list
+set listchars=tab:▸\ ,trail:•
+" Ignore crap in wildcard completion
+set wildignore+=*.o,*.obj,.git,*.pyc
+" Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
+filetype off
+filetype plugin indent on
+
+" Highlight 80th column so code can still be pretty in full-screen terminals
+if exists("&colorcolumn")
+    set colorcolumn=81
+endif
+
+" }}}
+
+" GVim / MacVim Config ============================================ {{{
 
 " Special options for gvim (instead of in .gvimrc)
 let s:uname = system("echo -n \"$(uname)\"")
 
 if has("gui_running")
-    map <UP> i
     " Light solarized colour scheme for gvim
     set background=light
     colorscheme solarized
@@ -91,14 +115,9 @@ if has("gui_running")
     endif
 endif
 
-" Posh powerline glyphs
-let g:Powerline_symbols = 'fancy'
-" Don't let Rails status line conflict with powerline
-let g:rails_statusline = 0
+" }}}
 
-" Make delimate handle spacing better
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
+" Mappings ======================================================== {{{
 
 let mapleader=','
 
@@ -131,23 +150,14 @@ noremap <C-k>  <C-w>k
 noremap <C-l>  <C-w>l
 noremap <leader>v <c-w>v
 
-" Fullscreen
-if s:uname == "Darwin"
-    noremap <D-Enter> :se invfullscreen<CR>
-    inoremap <D-Enter> <ESC>:set invfullscreen<CR>a
-else
-    noremap <A-Enter> :se invfullscreen<CR>
-    inoremap <A-Enter> <ESC>:set invfullscreen<CR>a
-end
-
 " Make Y yank rest of line, like D and C
 nnoremap Y y$
 
 " Cut, copy and paste using the real clipboard
-vmap <leader>y "+y
-vmap <leader>x "+x
-nmap <leader>p "+gp
-nmap <leader>P "+gP
+vnoremap <leader>y "+y
+vnoremap <leader>x "+x
+nnoremap <leader>p "+gp
+nnoremap <leader>P "+gP
 
 " Substitute
 nnoremap <leader>s :%s//g<left><left>
@@ -163,12 +173,13 @@ nnoremap ; :
 inoremap <c-cr> <esc>A<cr>
 inoremap <s-cr> <esc>O
 
+" Space toggles folds
+nnoremap <space> za
+vnoremap <space> za
+
 " Select (charwise) the contents of the current line, excluding indentation.
 " Great for pasting Python lines into REPLs.
 nnoremap vv ^vg_
-
-" Write files with sudo if opened without priviliedges
-cmap w!! w !sudo tee % >/dev/null
 
 " Switch tabs easily
 if s:uname == "Darwin"
@@ -179,12 +190,18 @@ else
     nnoremap <A-S-right> gt
 endif
 
-" Easy access to NERDTree
-map <F3> :NERDTreeToggle<CR>
+" Fullscreen
+if s:uname == "Darwin"
+    noremap <D-Enter> :se invfullscreen<CR>
+    inoremap <D-Enter> <ESC>:set invfullscreen<CR>a
+else
+    noremap <A-Enter> :se invfullscreen<CR>
+    inoremap <A-Enter> <ESC>:set invfullscreen<CR>a
+end
 
 " Shortcuts for enabling / disabling search highlighting
-nmap ,hl :set hls<CR>
-nmap ,nhl :set nohls<CR>
+nnoremap ,hl :set hls<CR>
+nnoremap ,nhl :set nohls<CR>
 
 " Use alt + {j,k} for moving lines up and down
 if s:uname == "Darwin"
@@ -203,41 +220,30 @@ else
     vnoremap <A-k> :m-2<CR>gv=gv
 endif
 
+" Write files with sudo if opened without priviliedges
+cmap w!! w !sudo tee % >/dev/null
+
+" }}}
+
+" Plugin Options ================================================== {{{
+
 if s:uname == "Darwin"
     " Command-T -- open in new tab with Command-Enter
     let g:CommandTAcceptSelectionTabMap=['<D-CR>', '<C-t>']
 endif
 
-" Use the same symbols as TextMate for tabstops and EOLs
-set list
-set listchars=tab:▸\ ,trail:•
+" Posh powerline glyphs
+let g:Powerline_symbols = 'fancy'
+" Don't let Rails status line conflict with powerline
+let g:rails_statusline = 0
 
-" Remove trailing whitespace
-function! <SID>CleanWhitespace()
-    " Preparation - save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-command CleanWhitespace call <SID>CleanWhitespace()
+" Make delimate handle spacing better
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
 
-set wildignore+=*.o,*.obj,.git,*.pyc
+" }}}
 
-" Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
-" (force reload for pathogen)
-filetype off
-filetype plugin indent on
-
-" Highlight 80th column so code can still be pretty in full-screen terminals
-if exists("&colorcolumn")
-    set colorcolumn=81
-    "hi ColorColumn guibg=#282828 ctermbg=235
-endif
+" Autocommands ==================================================== {{{
 
 " JSON support
 au! BufRead,BufNewFile *.json setfiletype json
@@ -281,9 +287,34 @@ if has("autocmd")
     " Enable Markdown support
     autocmd FileType markdown setlocal ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd FileType markdown setlocal nolist linebreak
+
+    " Use {{{ - }}} style folds in vimscript
+    autocmd FileType vim setlocal foldmethod=marker
 endif
+
+" }}}
+
+" Misc ============================================================ {{{
+
+" Remove trailing whitespace
+function! <SID>CleanWhitespace()
+    " Preparation - save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+command CleanWhitespace call <SID>CleanWhitespace()
+
 
 " Source a global configuration file if available
 if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+
+" }}}
+
