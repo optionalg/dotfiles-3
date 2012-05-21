@@ -12,7 +12,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'kien/ctrlp.vim'
+Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-markdown'
