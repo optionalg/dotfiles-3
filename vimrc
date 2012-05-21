@@ -238,19 +238,30 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Plugin Options ================================================== {{{
 
+" = Command-T ===================================================== {{{
+
 if s:uname == "Darwin"
     " Command-T -- open in new tab with Command-Enter
     let g:CommandTAcceptSelectionTabMap=['<D-CR>', '<C-t>']
 endif
 
+" Flush and reload the Command-T cache on focus and when files are written
+augroup CommandTExtensions
+    autocmd!
+    autocmd FocusGained * CommandTFlush
+    autocmd BufWritePost * CommandTFlush
+augroup END
+
+" }}}
+
+" = Powerline ===================================================== {{{
+
 " Posh powerline glyphs
 let g:Powerline_symbols = 'fancy'
 " Don't let Rails status line conflict with powerline
 let g:rails_statusline = 0
-
-" Make delimate handle spacing better
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
+"
+" }}}
 
 " }}}
 
