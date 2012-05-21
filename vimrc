@@ -39,12 +39,12 @@ syntax enable
 set autoindent
 " Replace tabs with spaces
 set expandtab
-" A tab shows as 4 columns wide
-set tabstop=4
+" A tab shows as 2 columns wide
+set tabstop=2
 " How many spaces to indent text with (using << and >>)
-set shiftwidth=4
+set shiftwidth=2
 " How many columns to insert when I press TAB
-set softtabstop=4
+set softtabstop=2
 " Highlight matching brackets
 set showmatch
 " Show line and column in status bar
