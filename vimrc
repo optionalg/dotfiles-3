@@ -11,6 +11,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+"Bundle 'slimv.vim'
+"Bundle 'paredit.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'git://git.wincent.com/command-t.git'
 Bundle 'tpope/vim-surround'
@@ -19,7 +21,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'jiangmiao/auto-pairs'
+"Bundle 'jiangmiao/auto-pairs'
 Bundle 'tpope/vim-endwise'
 Bundle 'matchit.zip'
 Bundle 'kana/vim-textobj-user'
@@ -28,6 +30,11 @@ Bundle 'othree/html5.vim'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'leshill/vim-json'
 Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'VimClojure'
+Bundle 'oscarh/vimerl'
+Bundle 'mileszs/ack.vim'
+Bundle 'godlygeek/tabular'
+Bundle 'reusee/vim.rust'
 
 " }}}
 
@@ -87,11 +94,18 @@ set wildignore+=*.o,*.obj,.git,*.pyc
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
 filetype off
 filetype plugin indent on
+" This makes RVM work inside Vim. I have no idea why.
+set shell=bash
 
 " Highlight 80th column so code can still be pretty in full-screen terminals
 if exists("&colorcolumn")
     set colorcolumn=81
 endif
+
+" Solarized is awesome
+colorscheme solarized
+" Light solarized colour scheme
+set background=light
 
 " }}}
 
@@ -101,9 +115,6 @@ endif
 let s:uname = system("echo -n \"$(uname)\"")
 
 if has("gui_running")
-    " Light solarized colour scheme for gvim
-    set background=light
-    colorscheme solarized
     " Make the window a bit taller
     set columns=80
     set lines=45
@@ -140,15 +151,10 @@ inoremap <DOWN> <C-O>gj
 inoremap <UP> <C-O>gk
 
 inoremap jj <ESC>
-inoremap kk <ESC>
 
 " Easier to type, and I never use the default behavior.
 noremap H ^
 noremap L g_
-
-" Stay in visual mode after indenting
-vnoremap < <gv
-vnoremap > >gv
 
 " Emacs-style start and end of line
 inoremap <c-a> <esc>I
@@ -263,16 +269,17 @@ let g:rails_statusline = 0
 "
 " }}}
 
+let g:vimclojure#ParenRainbow = 1
+
 " }}}
 
 " Autocommands ==================================================== {{{
 
-" JSON support
-au! BufRead,BufNewFile *.json setfiletype json
-
 if has("autocmd")
     " Clean up whitespace on save
     autocmd BufWritePre * CleanWhitespace
+    " Tell python files to use four spaces for indentation
+    autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell json files to use two spaces for indentation
@@ -312,6 +319,14 @@ if has("autocmd")
 
     " Use {{{ - }}} style folds in vimscript
     autocmd FileType vim setlocal foldmethod=marker
+
+    " JSON support
+    autocmd! BufRead,BufNewFile *.json setfiletype json
+
+    " Ruby files with stupid names
+    autocmd! BufRead,BufNewFile Guardfile setfiletype ruby
+    autocmd! BufRead,BufNewFile *.rabl setfiletype ruby
+    autocmd! BufRead,BufNewFile *.thor setfiletype ruby
 endif
 
 " }}}
@@ -337,6 +352,54 @@ command CleanWhitespace call <SID>CleanWhitespace()
 if filereadable(expand("$HOME/.vimrc.local"))
     source $HOME/.vimrc.local
 endif
+
+" }}}
+
+" Testing ======================================================== {{{
+
+" Thanks, Gary B!
+" https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    if in_test_file
+        call SetTestFile()
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if has("gui_running")
+        exec ":!rspec --no-color " . a:filename
+    else
+        exec ":!rspec --color " . a:filename
+    end
+endfunction
+noremap <leader>T :call RunTestFile()<CR>
 
 " }}}
 

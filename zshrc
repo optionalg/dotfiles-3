@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="dstufft"
+#export ZSH_THEME="dstufft"
 export ZSH_THEME="hmarr"
 
 # Set to this to use case-sensitive completion
@@ -18,6 +18,14 @@ plugins=(brew git osx zsh-syntax-highlighting)
 
 source $HOME/.shellconfig
 source $ZSH/oh-my-zsh.sh
+
+autoload predict-on
+zle -N predict-on
+zle -N predict-off
+bindkey '^Z'   predict-on
+bindkey '^X^Z' predict-off
+zstyle ':predict' verbose true
+setopt interactivecomments
 
 bindkey '\C-x\C-e' edit-command-line
 

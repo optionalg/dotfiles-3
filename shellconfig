@@ -29,10 +29,7 @@ if [ -f $HOME/.shellconfig.local ]; then
     source $HOME/.shellconfig.local
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
+export PATH=$HOME/.shell/bin:$PATH
 
 # Add a function to cd to each project directory
 PROJECTS_PATH="$HOME/projects"
@@ -41,4 +38,6 @@ for project in `ls $PROJECTS_PATH`; do
     eval "function ,$project { cd $PROJECTS_PATH/$project }"
   fi
 done
+
+eval "$(rbenv init - --no-rehash)"
 

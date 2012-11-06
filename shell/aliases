@@ -29,3 +29,8 @@ if [[ $PLATFORM == "Darwin" ]]; then
 else
     alias rvim="gvim --remote-silent"
 fi
+
+alias ccat="pygmentize -f 256 -O full,style=tango"
+
+alias bx="bundle exec"
+
