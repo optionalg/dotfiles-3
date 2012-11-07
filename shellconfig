@@ -39,5 +39,8 @@ for project in `ls $PROJECTS_PATH`; do
   fi
 done
 
+# for bundled binaries
+PATH=.bundle/binstubs:$PATH
+
 eval "$(rbenv init - --no-rehash)"
 
