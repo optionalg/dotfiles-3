@@ -200,6 +200,11 @@ nnoremap vv ^vg_
 
 " Switch tabs easily
 if s:uname == "Darwin"
+    " alt-h
+    nnoremap ˙ gT
+    " alt-l
+    nnoremap ¬ gt
+    " Works with GUI MacVim
     nnoremap <D-S-left> gT
     nnoremap <D-S-right> gt
 else
@@ -355,7 +360,7 @@ endif
 
 " }}}
 
-" Testing ======================================================== {{{
+" Testing ========================================================= {{{
 
 " Thanks, Gary B!
 " https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
@@ -401,5 +406,9 @@ function! RunTests(filename)
 endfunction
 noremap <leader>T :call RunTestFile()<CR>
 
+" }}}
+
+" Abbreviations =================================================== {{{
+abbr Xtick ✔
 " }}}
 

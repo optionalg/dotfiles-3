@@ -1,1 +1,4 @@
 --ignore-dir=.bundle
+--type-add=html=.haml
+--type-add=css=.sass,.scss
+--type-set=coffee=.coffee

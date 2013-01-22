@@ -38,6 +38,7 @@ for project in `ls $PROJECTS_PATH`; do
     eval "function ,$project { cd $PROJECTS_PATH/$project }"
   fi
 done
+unset project
 
 # for bundled binaries
 PATH=.bundle/binstubs:$PATH
