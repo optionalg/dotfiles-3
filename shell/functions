@@ -63,3 +63,33 @@ if [[ $PLATFORM == "Darwin" ]]; then
     }
 fi
 
+function update-ssh-config {
+  curl -u gocardless https://gc-ssh-config.herokuapp.com > ~/.ssh/config
+}
+
+function gh {
+  if [ ! -f .git/HEAD ]; then
+    echo "'$(basename `pwd`)' is not a valid git repository"
+    return 1
+  fi
+
+  branch=$(git symbolic-ref HEAD)
+  branch=${branch##refs/heads/}
+
+  url=$(git config --get remote.origin.url)
+  url=${url/git\@github\.com\:/https://github.com/}
+  url=$(echo $url | sed -E 's/\/(.git)?$//')
+
+  if [ -z $1 ]; then
+    url="$url/tree/$branch"
+  else
+    if [ -d $1 ]; then
+      url="$url/tree/$branch/$1"
+    else
+      url="$url/blob/$branch/$1"
+    fi
+  fi
+
+  open $url
+}
+
