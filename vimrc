@@ -35,6 +35,10 @@ Bundle 'oscarh/vimerl'
 Bundle 'mileszs/ack.vim'
 Bundle 'godlygeek/tabular'
 Bundle 'reusee/vim.rust'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'derekwyatt/vim-scala'
+Bundle 'tpope/vim-fugitive'
+Bundle 'git://github.com/thoughtbot/vim-rspec.git'
 
 " }}}
 
@@ -90,7 +94,7 @@ set noswapfile
 set list
 set listchars=tab:▸\ ,trail:•
 " Ignore crap in wildcard completion
-set wildignore+=*.o,*.obj,.git,*.pyc
+set wildignore+=*.o,*.obj,.git,*.pyc,node_modules
 " Enable filetype settings (inc. indentation), files in .vim/ftplugin are read
 filetype off
 filetype plugin indent on
@@ -176,6 +180,9 @@ vnoremap <leader>x "+x
 nnoremap <leader>p "+gp
 nnoremap <leader>P "+gP
 
+" Ack shortcut. <left><right> there to keep space being stripped :|
+nnoremap <leader>a :Ack! <left><right>
+
 " Substitute
 nnoremap <leader>s :%s//g<left><left>
 
@@ -245,6 +252,9 @@ endif
 " Write files with sudo if opened without priviliedges
 cmap w!! w !sudo tee % >/dev/null
 
+" Fucking sqlcomplete fucking up ctrl-c
+let g:ftplugin_sql_omni_key = '<C-X><C-O><C-c>'
+
 " }}}
 
 " Plugin Options ================================================== {{{
@@ -287,6 +297,7 @@ if has("autocmd")
     autocmd FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4
     " Tell ruby files to use two spaces for indentation
     autocmd FileType ruby setlocal softtabstop=2 shiftwidth=2 tabstop=4
+
     " Tell json files to use two spaces for indentation
     autocmd FileType json setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell javascript files to use two spaces for indentation
@@ -295,6 +306,10 @@ if has("autocmd")
     autocmd FileType coffee setlocal softtabstop=2 shiftwidth=2 tabstop=4
     " Tell scala files to use two spaces for indentation
     autocmd FileType scala setlocal softtabstop=2 shiftwidth=2 tabstop=4
+    " Tell go files to use tabs(!) for indentation
+    autocmd FileType go setlocal nolist noexpandtab
+    autocmd FileType go setlocal softtabstop=4 shiftwidth=4 tabstop=4
+    autocmd FileType go setlocal makeprg=go\ run\ %
     " Makefiles use tabs only
     autocmd FileType make setlocal noexpandtab
     " Some types of files should wrap to 79 characters
@@ -316,11 +331,11 @@ if has("autocmd")
     " Enable omnicomplete for Python
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     " Auto compile coffeescript
-    autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -c <afile>
+    autocmd BufWritePost,FileWritePost *.coffee :silent !coffee -c <afile> 2> /dev/null
 
     " Enable Markdown support
-    autocmd FileType markdown setlocal ai formatoptions=tcroqn2 comments=n:&gt;
-    autocmd FileType markdown setlocal nolist linebreak
+    "autocmd FileType markdown setlocal ai formatoptions=tacroqn2 comments=n:&gt;
+    "autocmd FileType markdown setlocal nolist linebreak
 
     " Use {{{ - }}} style folds in vimscript
     autocmd FileType vim setlocal foldmethod=marker
@@ -404,7 +419,15 @@ function! RunTests(filename)
         exec ":!rspec --color " . a:filename
     end
 endfunction
-noremap <leader>T :call RunTestFile()<CR>
+"noremap <leader>T :call RunTestFile()<CR>
+
+" Rspec.vim mappings
+map <Leader>TT :call RunCurrentSpecFile()<CR>
+map <Leader>TS :call RunNearestSpec()<CR>
+map <Leader>TL :call RunLastSpec()<CR>
+map <Leader>TA :call RunAllSpecs()<CR>
+
+noremap <leader>m :make<CR>
 
 " }}}
 
