@@ -13,7 +13,10 @@
     ci = commit
     st = status
     pretty-graph = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    contributors = !git log | grep Author | LC_ALL=C sed -E 's/Author: (.+) <.*/\\1/' | sort | uniq -c | sort -rn
 [url "https://github.com/"]
+    insteadOf = "github:"
+[url "git@github.com:"]
     insteadOf = "gh:"
 [core]
     excludesfile = /Users/harry/.gitexcludes
@@ -23,3 +26,5 @@
     cmd = /bin/sh -c 'open http://git-scm.com/docs/$(basename $1 .html)' --
 [diff]
     tool = vimdiff
+[web]
+	browser = open
