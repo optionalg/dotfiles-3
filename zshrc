@@ -29,5 +29,11 @@ setopt interactivecomments
 
 bindkey '\C-x\C-e' edit-command-line
 
+# speed up git completion
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/share/npm/bin:/Users/harry/bin
+
